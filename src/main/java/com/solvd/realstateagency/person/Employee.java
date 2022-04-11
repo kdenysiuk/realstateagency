@@ -1,24 +1,25 @@
 package com.solvd.realstateagency.person;
 
-import com.solvd.realstateagency.innterface.IHelp;
 import com.solvd.realstateagency.innterface.IWork;
 
-public class Employee extends Person implements IWork, IHelp{
-	private String position;
+public class Employee extends Person {
 	private int emplID;
-
-	public Employee(int pID, String pName, String pTelephone) {
+	
+	//constructor
+	public Employee(int pID, int emplID, String pName, String pTelephone) {
 		super(pID, pName, pTelephone);
+		this.emplID = emplID;
 	}
-
-	@Override
-	public void work() {
-		System.out.println("I'm working here.");
+	
+	//setters
+	public void setEmplID(int emplID) {
+		this.emplID = emplID;
 	}
-
-	@Override
-	public void help() {
-		System.out.println("Hello, how can I help you?");
+	
+	//getters
+	public int getEmplID() {
+		return emplID;
 	}
+	
 
 }

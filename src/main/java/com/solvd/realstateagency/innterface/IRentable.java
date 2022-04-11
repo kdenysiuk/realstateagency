@@ -1,5 +1,5 @@
 package com.solvd.realstateagency.innterface;
 
-public interface IRent {
+public interface IRentable {
 	public void rent();
 }

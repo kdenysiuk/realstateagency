@@ -6,9 +6,9 @@ import com.solvd.realstateagency.building.Building;
 import com.solvd.realstateagency.exception.InvalidAmountException;
 import com.solvd.realstateagency.exception.InvalidNumberException;
 import com.solvd.realstateagency.innterface.IBuyable;
-import com.solvd.realstateagency.innterface.IRent;
+import com.solvd.realstateagency.innterface.IRentable;
 
-public class Customer extends Person implements IRent, IBuyable {
+public class Customer extends Person implements IRentable, IBuyable {
 	private int salary;
 	private int moneyAvailable;
 	CustomLinkedlist<Building> properties = new CustomLinkedlist<Building>();
@@ -20,13 +20,13 @@ public class Customer extends Person implements IRent, IBuyable {
 	}
 	
 	//setters
-	public void setSalary(int salary) {
+	public void setSalary(int salary) throws InvalidNumberException {
 		if (salary < 0) {
 			throw new InvalidNumberException();
 		}
 		this.salary = salary;
 	}
-	public void setMoneyAvailable(int moneyAvailable) {
+	public void setMoneyAvailable(int moneyAvailable) throws InvalidNumberException {
 		if (moneyAvailable < 0) {
 			throw new InvalidNumberException();
 		}

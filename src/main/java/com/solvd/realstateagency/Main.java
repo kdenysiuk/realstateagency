@@ -6,10 +6,14 @@ import com.solvd.realstateagency.building.Apartment;
 import com.solvd.realstateagency.building.Building;
 import com.solvd.realstateagency.building.House;
 import com.solvd.realstateagency.building.Zone;
+import com.solvd.realstateagency.exception.InvalidNumberException;
 import com.solvd.realstateagency.exception.InvalidOptionException;
 import com.solvd.realstateagency.exception.NullBuildingException;
+import com.solvd.realstateagency.person.Company;
 import com.solvd.realstateagency.person.Customer;
 import com.solvd.realstateagency.person.Owner;
+import com.solvd.realstateagency.util.CustomLinkedlist;
+
 import java.util.Scanner;
 import java.util.LinkedList;
 
@@ -17,12 +21,11 @@ public class Main {
 	private static final Logger LOGGER = LogManager.getLogger(Main.class);
 	
 	public static void main(String[] args) throws InvalidOptionException {
-		
-		
 		Scanner input = new Scanner(System.in);
 		
 		
 		//I set some values for testing:
+		Company com1 = new Company(11111111, "SINAT", "3735444828");
 		Customer cust1 = new Customer(42189423, "Keith Denysiuk", "3735404649");
 		Owner own1 = new Owner(42222597, "Bruno Diaz", "3773508669");
 		House how1 = new House(11111, "58 Matheu St, Cnel Du Graty, Chaco", 150); //need to add the characteristic
@@ -40,8 +43,30 @@ public class Main {
 		apt2.setZone(downtownArea);
 		apt2.setRentPrice(apt1.getSuperface());
 		
-		//the owner has got the following properties:
-		//cust1.buy(5000, apt2);
+		//I set some amount of money for each person
+		try {
+			com1.setMoneyAvailable(1000000000);
+			cust1.setMoneyAvailable(550000);
+			own1.setMoneyAvailable(3750000);
+		} catch (InvalidNumberException e) {
+			e.printStackTrace();
+		}
+		
+		//Let's assign a sale price for each property
+		how1.setSalePrice(9500000);
+		apt1.setSalePrice(2000000);
+		apt2.setSalePrice(1500000);
+		
+		CustomLinkedlist<Building> availableProperties = new CustomLinkedlist<Building>();
+		availableProperties.addElement(how1);
+		availableProperties.addElement(apt1);
+		availableProperties.addElement(apt2);
+		
+		//Let's make properties be owned by the real state agency
+		
+		
+		//Let's see if each person can buy a property
+		
 		
 		int properties;
 		properties = 3;
@@ -156,8 +181,11 @@ public class Main {
 		
 		LinkedList<Building> propertiesAvailable = new LinkedList<Building>();
 		LOGGER.info("Enter your salary in AR$: ");
-		cust1.setSalary(input.nextInt());
-		
+		try {
+			cust1.setSalary(input.nextInt());
+		} catch (InvalidNumberException e) {
+			LOGGER.error(e.getMessage());
+		}
 		
 		//I have to change this part of the code, for replacing the "hascaracteristic" of building class with characteristics for each child class.
 		for (int i=0; i<properties; i++) {
