@@ -5,7 +5,7 @@ public class Building {
 	private String adress;
 	protected int superface;
 	private Zone zoneName;
-	private int rentPrice;
+	private double rentPrice;
 	private double salePrice;
 	
 	//constructor
@@ -29,12 +29,20 @@ public class Building {
 	public void setZone(Zone zoneName) {
 		this.zoneName = zoneName;
 	}
-	public void setRentPrice(int rentPrice) {
-		this.rentPrice = getSuperface() * getZoneName().getZonePrice();
+	
+	public void setRentPrice(double rentPrice) {
+		this.rentPrice = rentPrice;
 	}
-	public void setSalePrice (double salePrice) {
+	
+	public void setSalePrice(double salePrice) {
 		this.salePrice = salePrice;
 	}
+	
+	/*
+	 * public void setRentPrice(int rentPrice) { this.rentPrice = getSuperface() *
+	 * getZoneName().getZonePrice(); } public void setSalePrice (double salePrice) {
+	 * this.salePrice = salePrice; }
+	 */
 
 	//getters
 	public int setHID() {
@@ -49,7 +57,7 @@ public class Building {
 	public String getAdress() {
 		return adress;
 	}
-	public int getRentPrice() {
+	public double getRentPrice() {
 		return rentPrice;
 	}
 	public double getSalePrice() {
