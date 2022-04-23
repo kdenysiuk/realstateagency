@@ -1,16 +1,28 @@
 package com.solvd.realstateagency.building;
 
 public enum Zone {
-	DOWNTOWN("downtown area", 750), 
-	RESIDENTIAL("residential area", 500), 
-	SURBURBAN("surburban area", 250);
+	DOWNTOWN("downtown area", 750, 250000),
+	RESIDENTIAL("residential area", 500, 167000),
+	SUBURBAN("suburban area", 250, 84000);
 
 	private final String zone;
-	private final double price;
+	private final double rentPrice;
+	private final double salePrice;
 
-	private Zone(String zone, double price) {
+	private Zone(String zone, double rentPrice, double salePrice) {
 		this.zone = zone;
-		this.price = price;
+		this.rentPrice = rentPrice;
+		this.salePrice = salePrice;
+	}
+
+	public String getZone(){
+		return this.zone;
+	}
+	public double getRentPrice(){
+		return this.rentPrice;
+	}
+	public double getSalePrice(){
+		return this.salePrice;
 	}
 
 }

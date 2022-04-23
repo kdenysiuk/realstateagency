@@ -7,14 +7,18 @@ import com.solvd.realstateagency.innterface.IBuyable;
 import com.solvd.realstateagency.innterface.ISellable;
 import com.solvd.realstateagency.util.CustomLinkedlist;
 
-public class Company extends Person implements IBuyable, ISellable {
+public class Company implements IBuyable, ISellable {
+	private int CUIT;
+	private String pName;
+	private String pTelephone;
 	private int moneyAvailable;
 	CustomLinkedlist<Building> properties = new CustomLinkedlist<Building>();
-	
-	
+
 	//constructor
-	public Company(int pID, String pName, String pTelephone) {
-		super(pID, pName, pTelephone);
+	public Company (int CUIT, String pName, String pTelephone) {
+		this.CUIT = CUIT;
+		this.pName = pName;
+		this.pTelephone = pTelephone;
 	}
 	
 	//setters
@@ -24,8 +28,26 @@ public class Company extends Person implements IBuyable, ISellable {
 		}
 		this.moneyAvailable = moneyAvailable;
 	}
-	
+	public void setPID(int pID) {
+		this.CUIT = pID;
+	}
+	public void setPName(String pName) {
+		this.pName = pName;
+	}
+	public void setPTelephone(String pTelephone) {
+		this.pTelephone = pTelephone;
+	}
+
 	//getters
+	public int getCUIT() {
+		return CUIT;
+	}
+	public String getPName() {
+		return pName;
+	}
+	public String getPTelephone() {
+		return pTelephone;
+	}
 	public int getMoneyAvailable() {
 		return moneyAvailable;
 	}
