@@ -4,6 +4,7 @@ import com.solvd.realstateagency.building.Apartment;
 import com.solvd.realstateagency.building.Building;
 import com.solvd.realstateagency.building.House;
 import com.solvd.realstateagency.building.Zone;
+import com.solvd.realstateagency.exception.InvalidNumberException;
 import com.solvd.realstateagency.person.Company;
 import com.solvd.realstateagency.person.Customer;
 import com.solvd.realstateagency.person.Owner;
@@ -17,7 +18,7 @@ public class Main {
 	
 	private static final Logger LOGGER = LogManager.getLogger(MainOld.class);
 	
-	public static void main (String[] args) {
+	public static void main (String[] args) throws InvalidNumberException {
 		
 		//create objects
 		Company sinat = new Company(2073456767, "SINAT", "3735444828");
@@ -44,9 +45,11 @@ public class Main {
 		
 		//set rent prices
 		propertiesAvailable.forEach((x) -> x.setRentPrice(x.calculatePrice(x.getZone().getRentPrice(), x.getSuperface())));
+		keith.setSalary(120000);
 
 		//set sale prices
 		propertiesAvailable.forEach((x) -> x.setSalePrice(x.calculatePrice(x.getZone().getSalePrice(), x.getSuperface())));
+		bruno.setMoneyAvailable(1500000);
 
 		//Application
 
@@ -62,19 +65,21 @@ public class Main {
 				switch(choice){
 					case 1:
 						LOGGER.info("Hello, here is your information:");
-						Option.showPersonInfo(keith);
+						Option.showRentingInfo(keith);
 						Option.asCustomerOption();
+						Option.showAvailablePropertiesList(propertiesAvailable);
 						flag = false;
 						break;
 					case 2:
 						LOGGER.info("Hello, here is your information:");
-						Option.showPersonInfo(bruno);
+						Option.showBuyingInfo(bruno);
 						Option.asCustomerOption();
 						flag = false;
 						break;
 					case 3:
 						LOGGER.info("Hello, here is your information:");
 						Option.showCompanyInfo(sinat);
+						Option.asCompanyOption(propertiesAvailable);
 						flag = false;
 						break;
 					default:
@@ -82,11 +87,5 @@ public class Main {
 				}
 			}
 		}
-
-		//print test
-		propertiesAvailable.forEach((Building elem) -> LOGGER.info("Address: "+elem.getAdress()+" Price per month: AR$ "+elem.getRentPrice()));
-		propertiesAvailable.forEach((Building elem) -> LOGGER.info("Address: "+elem.getAdress()+" Price: AR$ "+elem.getSalePrice()));
-
 	}
-
 }

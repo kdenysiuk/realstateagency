@@ -1,6 +1,5 @@
 package com.solvd.realstateagency.person;
 
-import java.util.ArrayList;
 import com.solvd.realstateagency.util.CustomLinkedlist;
 import com.solvd.realstateagency.building.Building;
 import com.solvd.realstateagency.exception.InvalidAmountException;
@@ -10,7 +9,7 @@ import com.solvd.realstateagency.innterface.ISellable;
 
 public class Owner extends Person implements IBuyable, ISellable {
 	private int moneyAvailable;
-	CustomLinkedlist<Building> properties = new CustomLinkedlist<Building>();
+	CustomLinkedlist<Building> properties = new CustomLinkedlist<>();
 	
 	//constructor
 	public Owner(int pID, String pName, String pTelephone) {

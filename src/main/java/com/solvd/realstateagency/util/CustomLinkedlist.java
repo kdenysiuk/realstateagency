@@ -83,4 +83,18 @@ public class CustomLinkedlist<T> {
 		}
 	}
 
+	public int size() {
+		Node<T> currentNode = head;
+		int size = 0;
+		if (currentNode == null) {
+			System.out.println("Linked list is empty");
+		} else {
+			while (currentNode != null) {
+				size = size + 1;
+				currentNode = currentNode.next;
+			}
+		}
+		return size;
+	}
+
 }
