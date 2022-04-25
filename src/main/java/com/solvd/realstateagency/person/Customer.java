@@ -1,5 +1,6 @@
 package com.solvd.realstateagency.person;
 
+import com.solvd.realstateagency.exception.InvalidAmountException;
 import com.solvd.realstateagency.util.CustomLinkedlist;
 import com.solvd.realstateagency.building.Building;
 import com.solvd.realstateagency.exception.InvalidNumberException;
@@ -28,8 +29,11 @@ public class Customer extends Person implements IRentable {
 	}
 
 	@Override
-	public void rent() {
-		System.out.println("I want to rent a property.");
+	public void rent(Building property) {
+		if (salary * 0.5 < property.getRentPrice()) {
+			throw new InvalidAmountException();
+		}
+		properties.addElement(property);
 	}
 	
 }

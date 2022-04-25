@@ -1,11 +1,11 @@
-package com.solvd.realstateagency.runner;
+package com.solvd.realstateagency.main;
 
 import com.solvd.realstateagency.building.Apartment;
 import com.solvd.realstateagency.building.Building;
 import com.solvd.realstateagency.building.House;
 import com.solvd.realstateagency.building.Zone;
 import com.solvd.realstateagency.exception.InvalidNumberException;
-import com.solvd.realstateagency.person.Company;
+import com.solvd.realstateagency.company.Company;
 import com.solvd.realstateagency.person.Customer;
 import com.solvd.realstateagency.person.Owner;
 import org.apache.logging.log4j.LogManager;
@@ -16,7 +16,7 @@ import java.util.Scanner;
 
 public class Main {
 	
-	private static final Logger LOGGER = LogManager.getLogger(MainOld.class);
+	private static final Logger LOGGER = LogManager.getLogger(Main.class);
 	
 	public static void main (String[] args) throws InvalidNumberException {
 
@@ -49,7 +49,7 @@ public class Main {
 
 		//set sale prices
 		propertiesAvailable.forEach((x) -> x.setSalePrice(x.calculatePrice(x.getZone().getSalePrice(), x.getSurface())));
-		bruno.setMoneyAvailable(1500000);
+		bruno.setMoneyAvailable(15000000);
 
 		//Application
 
@@ -67,13 +67,16 @@ public class Main {
 						LOGGER.info("Hello, here is your information:");
 						Option.showRentingInfo(keith);
 						Option.asCustomerOption();
-						Option.showAvailablePropertiesList(propertiesAvailable, keith);
+						Option.showAvailableRentingPropertiesList(propertiesAvailable, keith);
+						Option.rentAvailableBuilding(keith);
 						flag = false;
 						break;
 					case 2:
 						LOGGER.info("Hello, here is your information:");
 						Option.showBuyingInfo(bruno);
 						Option.asCustomerOption();
+						Option.showAvailableBuyingPropertiesList(propertiesAvailable, bruno);
+						Option.buyAvailableBuilding(bruno);
 						flag = false;
 						break;
 					case 3:

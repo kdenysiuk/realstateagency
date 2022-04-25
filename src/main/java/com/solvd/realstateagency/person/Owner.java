@@ -8,8 +8,8 @@ import com.solvd.realstateagency.innterface.IBuyable;
 import com.solvd.realstateagency.innterface.ISellable;
 
 public class Owner extends Person implements IBuyable, ISellable {
-	private int moneyAvailable;
-	CustomLinkedlist<Building> properties = new CustomLinkedlist<>();
+	private double moneyAvailable;
+	public CustomLinkedlist<Building> properties = new CustomLinkedlist<>();
 	
 	//constructor
 	public Owner(int pID, String pName, String pTelephone) {
@@ -25,16 +25,16 @@ public class Owner extends Person implements IBuyable, ISellable {
 	}
 	
 	//getters
-	public int getMoneyAvailable() {
+	public double getMoneyAvailable() {
 		return moneyAvailable;
 	}
 
 	@Override
-	public void buy(int propertyPrice, Building property) {
-		if (moneyAvailable < propertyPrice) {
+	public void buy(Building property) {
+		if (moneyAvailable < property.getSalePrice()) {
 			throw new InvalidAmountException();
 		} 
-		moneyAvailable = moneyAvailable - propertyPrice;
+		moneyAvailable = moneyAvailable - property.getSalePrice();
 		properties.addElement(property);
 	}
 

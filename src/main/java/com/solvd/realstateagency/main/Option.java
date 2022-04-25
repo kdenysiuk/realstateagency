@@ -1,10 +1,10 @@
-package com.solvd.realstateagency.runner;
+package com.solvd.realstateagency.main;
 
 import com.solvd.realstateagency.building.Building;
-import com.solvd.realstateagency.person.Company;
+import com.solvd.realstateagency.company.Company;
 import com.solvd.realstateagency.person.Customer;
 import com.solvd.realstateagency.person.Owner;
-import com.solvd.realstateagency.util.Node;
+import com.solvd.realstateagency.util.CustomLinkedlist;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -13,12 +13,13 @@ import java.util.Scanner;
 
 public class Option {
 
-    private static final Logger LOGGER = LogManager.getLogger(MainOld.class);
+    private static final Logger LOGGER = LogManager.getLogger(Main.class);
     static Scanner input = new Scanner(System.in);
+    private static CustomLinkedlist<Building> availableForYou = new CustomLinkedlist<>();
     private static boolean hasMultiOffice;
     private static boolean hasHouseYard;
     private static boolean hasUniqueRoom;
-    private static boolean isIndusrtyPremises;
+    private static boolean isIndustryPremises;
 
     public static void showRentingInfo(Customer person) {
         LOGGER.info("Name: " + person.getPName()
@@ -118,11 +119,11 @@ public class Option {
                         String chocie3 = input.next();
                         if (chocie3.equalsIgnoreCase("y")) {
                             LOGGER.info("You chose an industries premises.");
-                            isIndusrtyPremises = true;
+                            isIndustryPremises = true;
                             flag = false;
                         } else if (chocie3.equalsIgnoreCase("n")) {
                             LOGGER.info("You chose an non industries premises.");
-                            isIndusrtyPremises = false;
+                            isIndustryPremises = false;
                             flag = false;
                         } else {
                             LOGGER.info("Invalid option, try again.");
@@ -165,26 +166,90 @@ public class Option {
         }
     }
 
-    public static void showAvailablePropertiesList (LinkedList<Building> building, Customer person) {
+    public static void showAvailableRentingPropertiesList(LinkedList<Building> building, Customer person) {
+
         for (int i=0; i < building.size(); i++) {
-            if(building.get(i).getClass().toString().equals("class com.solvd.realstateagency.building.Apartment")) {
-                if (building.get(i).getUniqueRoom() == hasUniqueRoom && person.getSalary() * 0.5 > building.get(i).getRentPrice()) {
-                    person.properties.addElement(building.get(i));
-                }
-            } else if (building.get(i).getClass().toString().equals("class com.solvd.realstateagency.building.House")) {
-                if (building.get(i).getUniqueRoom() == hasHouseYard && person.getSalary() * 0.5 > building.get(i).getRentPrice()) {
-                    person.properties.addElement(building.get(i));
-                }
-            } else if (building.get(i).getClass().toString().equals("class com.solvd.realstateagency.building.Office")) {
-                if (building.get(i).getUniqueRoom() == hasMultiOffice && person.getSalary() * 0.5 > building.get(i).getRentPrice()) {
-                    person.properties.addElement(building.get(i));
-                }
-            } else {
-                if (building.get(i).getUniqueRoom() == isIndusrtyPremises && person.getSalary() * 0.5 > building.get(i).getRentPrice()) {
-                    person.properties.addElement(building.get(i));
-                }
+            switch (building.get(i).getClass().toString()) {
+                case "class com.solvd.realstateagency.building.Apartment":
+                    if (building.get(i).getUniqueRoom() == hasUniqueRoom && person.getSalary() * 0.5 > building.get(i).getRentPrice()) {
+                        availableForYou.addElement(building.get(i));
+                    }
+                    break;
+                case "class com.solvd.realstateagency.building.House":
+                    if (building.get(i).getUniqueRoom() == hasHouseYard && person.getSalary() * 0.5 > building.get(i).getRentPrice()) {
+                        availableForYou.addElement(building.get(i));
+                    }
+                    break;
+                case "class com.solvd.realstateagency.building.Office":
+                    if (building.get(i).getUniqueRoom() == hasMultiOffice && person.getSalary() * 0.5 > building.get(i).getRentPrice()) {
+                        availableForYou.addElement(building.get(i));
+                    }
+                    break;
+                default:
+                    if (building.get(i).getUniqueRoom() == isIndustryPremises && person.getSalary() * 0.5 > building.get(i).getRentPrice()) {
+                        availableForYou.addElement(building.get(i));
+                    }
+                    break;
             }
         }
-        LOGGER.info(person.properties.getElementAt(0).getElement().getAddress());
+    }
+
+    public static void rentAvailableBuilding (Customer person){
+        int c = 0;
+        int choice;
+        LOGGER.info("Which property do you want to rent?: ");
+        for (int i = 0; i < availableForYou.size(); i++) {
+            LOGGER.info("Option " + (c+1) +": " + availableForYou.getElementAt(c).getElement().getAddress() + "Price per month: AR$ " + availableForYou.getElementAt(c).getElement().getRentPrice());
+        }
+        try{
+            choice = input.nextInt() - 1;
+            person.rent(availableForYou.getElementAt(choice).getElement());
+        } catch(Exception e) {
+            LOGGER.info(e.getMessage());
+        }
+        LOGGER.info("Property rented!");
+    }
+
+    public static void showAvailableBuyingPropertiesList(LinkedList<Building> building, Owner person) {
+        for (int i=0; i < building.size(); i++) {
+            switch (building.get(i).getClass().toString()) {
+                case "class com.solvd.realstateagency.building.Apartment":
+                    if (building.get(i).getUniqueRoom() == hasUniqueRoom && person.getMoneyAvailable() > building.get(i).getSalePrice()) {
+                        availableForYou.addElement(building.get(i));
+                    }
+                    break;
+                case "class com.solvd.realstateagency.building.House":
+                    if (building.get(i).getUniqueRoom() == hasHouseYard && person.getMoneyAvailable() > building.get(i).getSalePrice()) {
+                        availableForYou.addElement(building.get(i));
+                    }
+                    break;
+                case "class com.solvd.realstateagency.building.Office":
+                    if (building.get(i).getUniqueRoom() == hasMultiOffice && person.getMoneyAvailable() > building.get(i).getSalePrice()) {
+                        availableForYou.addElement(building.get(i));
+                    }
+                    break;
+                default:
+                    if (building.get(i).getUniqueRoom() == isIndustryPremises && person.getMoneyAvailable() > building.get(i).getSalePrice()) {
+                        availableForYou.addElement(building.get(i));
+                    }
+                    break;
+            }
+        }
+    }
+
+    public static void buyAvailableBuilding (Owner person){
+        int c = 0;
+        int choice;
+        LOGGER.info("Which property do you want to buy?: ");
+        for (int i = 0; i < availableForYou.size(); i++) {
+            LOGGER.info("Option " + (c+1) +": " + availableForYou.getElementAt(c).getElement().getAddress() + "Price: AR$ " + availableForYou.getElementAt(c).getElement().getSalePrice());
+        }
+        try{
+            choice = input.nextInt() - 1;
+            person.buy(availableForYou.getElementAt(choice).getElement());
+        } catch(Exception e) {
+            LOGGER.info(e.getMessage());
+        }
+        LOGGER.info("Property bought!");
     }
 }

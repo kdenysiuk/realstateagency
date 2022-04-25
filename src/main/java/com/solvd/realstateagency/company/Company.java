@@ -1,4 +1,4 @@
-package com.solvd.realstateagency.person;
+package com.solvd.realstateagency.company;
 
 import com.solvd.realstateagency.building.Building;
 import com.solvd.realstateagency.exception.InvalidAmountException;
@@ -11,7 +11,7 @@ public class Company implements IBuyable, ISellable {
 	private int CUIT;
 	private String pName;
 	private String pTelephone;
-	private int moneyAvailable;
+	private double moneyAvailable;
 	CustomLinkedlist<Building> properties = new CustomLinkedlist<Building>();
 
 	//constructor
@@ -48,16 +48,16 @@ public class Company implements IBuyable, ISellable {
 	public String getPTelephone() {
 		return pTelephone;
 	}
-	public int getMoneyAvailable() {
+	public double getMoneyAvailable() {
 		return moneyAvailable;
 	}
 	
 	@Override
-	public void buy(int propertyPrice, Building property) {
-		if (moneyAvailable < propertyPrice) {
+	public void buy(Building property) {
+		if (moneyAvailable < property.getSalePrice()) {
 			throw new InvalidAmountException();
 		} 
-		moneyAvailable = moneyAvailable - propertyPrice;
+		moneyAvailable = moneyAvailable - property.getSalePrice();
 		properties.addElement(property);
 	}
 	
