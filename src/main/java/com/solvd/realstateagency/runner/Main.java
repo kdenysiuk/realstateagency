@@ -19,7 +19,7 @@ public class Main {
 	private static final Logger LOGGER = LogManager.getLogger(MainOld.class);
 	
 	public static void main (String[] args) throws InvalidNumberException {
-		
+
 		//create objects
 		Company sinat = new Company(2073456767, "SINAT", "3735444828");
 		Customer keith = new Customer(42189423, "Keith Denysiuk", "3735404649");
@@ -44,11 +44,11 @@ public class Main {
 		marmolSt.setZone(Zone.DOWNTOWN);
 		
 		//set rent prices
-		propertiesAvailable.forEach((x) -> x.setRentPrice(x.calculatePrice(x.getZone().getRentPrice(), x.getSuperface())));
+		propertiesAvailable.forEach((x) -> x.setRentPrice(x.calculatePrice(x.getZone().getRentPrice(), x.getSurface())));
 		keith.setSalary(120000);
 
 		//set sale prices
-		propertiesAvailable.forEach((x) -> x.setSalePrice(x.calculatePrice(x.getZone().getSalePrice(), x.getSuperface())));
+		propertiesAvailable.forEach((x) -> x.setSalePrice(x.calculatePrice(x.getZone().getSalePrice(), x.getSurface())));
 		bruno.setMoneyAvailable(1500000);
 
 		//Application
@@ -67,7 +67,7 @@ public class Main {
 						LOGGER.info("Hello, here is your information:");
 						Option.showRentingInfo(keith);
 						Option.asCustomerOption();
-						Option.showAvailablePropertiesList(propertiesAvailable);
+						Option.showAvailablePropertiesList(propertiesAvailable, keith);
 						flag = false;
 						break;
 					case 2:

@@ -6,11 +6,21 @@ public class Node<T> {
 	T element;
 	
 	//element in the next node
-    Node next;
+    Node<T> next;
 
     //Constructor 
     Node(T element) {
         this.element = element;
+    }
+
+    //setter
+    public void setElement(T element){
+        this.element = element;
+    }
+
+    //getter
+    public T getElement(){
+        return element;
     }
 
 }

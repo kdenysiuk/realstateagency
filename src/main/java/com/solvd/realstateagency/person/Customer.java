@@ -7,7 +7,7 @@ import com.solvd.realstateagency.innterface.IRentable;
 
 public class Customer extends Person implements IRentable {
 	private int salary;
-	CustomLinkedlist<Building> properties = new CustomLinkedlist<>();
+	public CustomLinkedlist<Building> properties = new CustomLinkedlist<>();
 
 	//constructor
 	public Customer(int pID, String pName, String pTelephone) {

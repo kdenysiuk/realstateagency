@@ -3,7 +3,7 @@ package com.solvd.realstateagency.building;
 public class Building {
 	private int hID;
 	private String adress;
-	protected double superface;
+	protected double surface;
 	private Zone zone;
 	private double rentPrice;
 	private double salePrice;
@@ -12,7 +12,7 @@ public class Building {
 	public Building(int hID, String adress, double superface) {
 		this.hID = hID;
 		this.adress = adress;
-		this.superface = superface;
+		this.surface = superface;
 	
 	}
 	
@@ -20,11 +20,11 @@ public class Building {
 	public void setHID(int hID) {
 		this.hID = hID;
 	}
-	public void setAdress(String adress) {
+	public void setAddress(String adress) {
 		this.adress = adress;
 	}
-	public void setSuperface(int superface) {
-		this.superface = superface;
+	public void setSurface(int surface) {
+		this.surface = surface;
 	}
 	public void setZone(Zone zone) {
 		this.zone = zone;
@@ -48,13 +48,13 @@ public class Building {
 	public int setHID() {
 		return hID;
 	}
-	public double getSuperface() {
-		return superface;
+	public double getSurface() {
+		return surface;
 	}
 	public Zone getZone() {
 		return zone;
 	}
-	public String getAdress() {
+	public String getAddress() {
 		return adress;
 	}
 	public double getRentPrice() {
@@ -67,6 +67,9 @@ public class Building {
 	public double calculatePrice(double zonePrice, double superface) {
 		return zonePrice * superface;
 	}
-	
+
+	public boolean getUniqueRoom() {
+		return false;
+	}
 }
 
