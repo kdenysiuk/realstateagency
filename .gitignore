@@ -5,6 +5,5 @@ bin
 .classpath
 .project
 outtext.txt
-text.txt
 target
 test

@@ -3,7 +3,7 @@ package com.solvd.realstateagency.building;
 public class Building {
 	private int hID;
 	private String adress;
-	protected double surface;
+	private double surface;
 	private Zone zone;
 	private double rentPrice;
 	private double salePrice;

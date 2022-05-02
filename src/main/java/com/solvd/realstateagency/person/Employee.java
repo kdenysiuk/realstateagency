@@ -20,6 +20,35 @@ public class Employee extends Person {
 	public int getEmplID() {
 		return emplID;
 	}
-	
 
+
+	@Override
+	public void setPID(int pID) {
+		this.pID = pID;
+	}
+
+	@Override
+	public void setPName(String pName) {
+		this.pName = pName;
+	}
+
+	@Override
+	public void setPTelephone(String pTelephone) {
+		this.pTelephone = pTelephone;
+	}
+
+	@Override
+	public int getPID() {
+		return pID;
+	}
+
+	@Override
+	public String getPName() {
+		return pName;
+	}
+
+	@Override
+	public String getPTelephone() {
+		return pTelephone;
+	}
 }

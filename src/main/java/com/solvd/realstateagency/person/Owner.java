@@ -4,10 +4,10 @@ import com.solvd.realstateagency.util.CustomLinkedlist;
 import com.solvd.realstateagency.building.Building;
 import com.solvd.realstateagency.exception.InvalidAmountException;
 import com.solvd.realstateagency.exception.InvalidNumberException;
-import com.solvd.realstateagency.innterface.IBuyable;
-import com.solvd.realstateagency.innterface.ISellable;
+import com.solvd.realstateagency.innterface.IBuy;
+import com.solvd.realstateagency.innterface.ISell;
 
-public class Owner extends Person implements IBuyable, ISellable {
+public class Owner extends Person implements IBuy, ISell {
 	private double moneyAvailable;
 	public CustomLinkedlist<Building> properties = new CustomLinkedlist<>();
 	
@@ -15,7 +15,37 @@ public class Owner extends Person implements IBuyable, ISellable {
 	public Owner(int pID, String pName, String pTelephone) {
 		super(pID, pName, pTelephone);
 	}
-	
+
+	@Override
+	public void setPID(int pID) {
+		this.pID = pID;
+	}
+
+	@Override
+	public void setPName(String pName) {
+		this.pName = pName;
+	}
+
+	@Override
+	public void setPTelephone(String pTelephone) {
+		this.pTelephone = pTelephone;
+	}
+
+	@Override
+	public int getPID() {
+		return pID;
+	}
+
+	@Override
+	public String getPName() {
+		return pName;
+	}
+
+	@Override
+	public String getPTelephone() {
+		return pTelephone;
+	}
+
 	//setters
 	public void setMoneyAvailable(int moneyAvailable) throws InvalidNumberException {
 		if (moneyAvailable < 0) {

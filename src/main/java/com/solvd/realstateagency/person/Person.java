@@ -1,9 +1,9 @@
 package com.solvd.realstateagency.person;
 
-public class Person {
-	private int pID;
-	private String pName;
-	private String pTelephone;
+public abstract class Person {
+	protected int pID;
+	protected String pName;
+	protected String pTelephone;
 	
 	//constructor
 	public Person (int pID, String pName, String pTelephone) {
@@ -12,23 +12,16 @@ public class Person {
 		this.pTelephone = pTelephone;
 	}
 	//setters
-	public void setPID(int pID) {
-		this.pID = pID;
-	}
-	public void setPName(String pName) {
-		this.pName = pName;
-	}
-	public void setPTelephone(String pTelephone) {
-		this.pTelephone = pTelephone;
-	}
+	public abstract void setPID(int pID);
+
+	public abstract void setPName(String pName);
+
+	public abstract void setPTelephone(String pTelephone);
+
 	//getters
-	public int getPID() {
-		return pID;
-	}
-	public String getPName() {
-		return pName;
-	}
-	public String getPTelephone() {
-		return pTelephone;
-	}
+	public abstract int getPID();
+
+	public abstract String getPName();
+
+	public abstract String getPTelephone();
 }

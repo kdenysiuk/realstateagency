@@ -9,12 +9,6 @@ public class CustomerAssistant extends Employee implements IWork {
 		super(pID, emplID, pName, pTelephone);
 	}
 	
-	//setters
-	//none
-	
-	//getters
-	//none
-	
 	@Override
 	public void work() {
 		System.out.println("I'm working here.");

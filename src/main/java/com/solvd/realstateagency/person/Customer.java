@@ -4,9 +4,9 @@ import com.solvd.realstateagency.exception.InvalidAmountException;
 import com.solvd.realstateagency.util.CustomLinkedlist;
 import com.solvd.realstateagency.building.Building;
 import com.solvd.realstateagency.exception.InvalidNumberException;
-import com.solvd.realstateagency.innterface.IRentable;
+import com.solvd.realstateagency.innterface.IRent;
 
-public class Customer extends Person implements IRentable {
+public class Customer extends Person implements IRent {
 	private int salary;
 	public CustomLinkedlist<Building> properties = new CustomLinkedlist<>();
 
@@ -14,7 +14,37 @@ public class Customer extends Person implements IRentable {
 	public Customer(int pID, String pName, String pTelephone) {
 		super(pID, pName, pTelephone);
 	}
-	
+
+	@Override
+	public void setPID(int pID) {
+		this.pID = pID;
+	}
+
+	@Override
+	public void setPName(String pName) {
+		this.pName = pName;
+	}
+
+	@Override
+	public void setPTelephone(String pTelephone) {
+		this.pTelephone = pTelephone;
+	}
+
+	@Override
+	public int getPID() {
+		return pID;
+	}
+
+	@Override
+	public String getPName() {
+		return pName;
+	}
+
+	@Override
+	public String getPTelephone() {
+		return pTelephone;
+	}
+
 	//setters
 	public void setSalary(int salary) throws InvalidNumberException {
 		if (salary < 0) {

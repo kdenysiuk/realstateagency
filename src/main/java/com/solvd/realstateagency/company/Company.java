@@ -3,11 +3,11 @@ package com.solvd.realstateagency.company;
 import com.solvd.realstateagency.building.Building;
 import com.solvd.realstateagency.exception.InvalidAmountException;
 import com.solvd.realstateagency.exception.InvalidNumberException;
-import com.solvd.realstateagency.innterface.IBuyable;
-import com.solvd.realstateagency.innterface.ISellable;
+import com.solvd.realstateagency.innterface.IBuy;
+import com.solvd.realstateagency.innterface.ISell;
 import com.solvd.realstateagency.util.CustomLinkedlist;
 
-public class Company implements IBuyable, ISellable {
+public class Company implements IBuy, ISell {
 	private int CUIT;
 	private String pName;
 	private String pTelephone;
