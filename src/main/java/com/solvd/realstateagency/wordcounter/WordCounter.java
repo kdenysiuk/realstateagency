@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.TreeSet;
 import java.util.regex.Pattern;
-import java.util.ArrayList;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.LogManager;

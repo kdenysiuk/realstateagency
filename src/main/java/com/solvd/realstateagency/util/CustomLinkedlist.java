@@ -3,7 +3,6 @@ package com.solvd.realstateagency.util;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-
 public class CustomLinkedlist<T> {
 	Node<T> head;
 	private static final Logger LOGGER = LogManager.getLogger(CustomLinkedlist.class);

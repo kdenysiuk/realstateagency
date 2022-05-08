@@ -3,8 +3,8 @@ package com.solvd.realstateagency.building;
 public class Apartment extends Building {
 	private boolean uniqueRoom;
 
-	public Apartment(int hID, String adress, int superface) {
-		super(hID, adress, superface);
+	public Apartment(int hID, String address, int surface) {
+		super(hID, address, surface);
 	}
 	
 	//setters

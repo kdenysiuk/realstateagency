@@ -3,8 +3,8 @@ package com.solvd.realstateagency.building;
 public class House extends Building {
 	private boolean hasHouseYard;
 
-	public House(int hID, String adress, int superface) {
-		super(hID, adress, superface);
+	public House(int hID, String address, int surface) {
+		super(hID, address, surface);
 	}
 
 	//setters

@@ -1,18 +1,31 @@
 package com.solvd.realstateagency.building;
 
+import com.solvd.realstateagency.main.Main;
+import com.solvd.realstateagency.person.Customer;
+import com.solvd.realstateagency.person.Owner;
+import com.solvd.realstateagency.util.CustomLinkedlist;
+import com.solvd.realstateagency.util.TransactionQueue;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.util.Scanner;
+
 public class Building {
 	private int hID;
-	private String adress;
+	private String address;
 	private double surface;
 	private Zone zone;
 	private double rentPrice;
 	private double salePrice;
+	private static final Logger LOGGER = LogManager.getLogger(Main.class);
+	static Scanner input = new Scanner(System.in);
+	public static CustomLinkedlist<Building> availableForYou = new CustomLinkedlist<>();
 	
 	//constructor
-	public Building(int hID, String adress, double superface) {
+	public Building(int hID, String address, double surface) {
 		this.hID = hID;
-		this.adress = adress;
-		this.surface = superface;
+		this.address = address;
+		this.surface = surface;
 	
 	}
 	
@@ -20,8 +33,8 @@ public class Building {
 	public void setHID(int hID) {
 		this.hID = hID;
 	}
-	public void setAddress(String adress) {
-		this.adress = adress;
+	public void setAddress(String address) {
+		this.address = address;
 	}
 	public void setSurface(int surface) {
 		this.surface = surface;
@@ -55,7 +68,7 @@ public class Building {
 		return zone;
 	}
 	public String getAddress() {
-		return adress;
+		return address;
 	}
 	public double getRentPrice() {
 		return rentPrice;
@@ -64,12 +77,44 @@ public class Building {
 		return salePrice;
 	}
 
-	public double calculatePrice(double zonePrice, double superface) {
-		return zonePrice * superface;
+	public double calculatePrice(double zonePrice, double surface) {
+		return zonePrice * surface;
 	}
 
-	public boolean getUniqueRoom() {
-		return false;
+	public static void rentAvailableBuilding (Customer person){
+		int c = 0;
+		int choice;
+		LOGGER.info("Which property do you want to rent?: ");
+		for (int i = 0; i < availableForYou.size(); i++) {
+			LOGGER.info("Option " + (c+1) +": " + availableForYou.getElementAt(c).getElement().getAddress() + " Price per month: AR$ " + availableForYou.getElementAt(c).getElement().getRentPrice());
+		}
+		try{
+			choice = input.nextInt() - 1;
+			person.rent(availableForYou.getElementAt(choice).getElement());
+			TransactionQueue.storeTransactionOrder(availableForYou.getElementAt(choice).getElement().getAddress() + " was rented.");
+		} catch(Exception e) {
+			LOGGER.info(e.getMessage());
+		}
+		LOGGER.info("Transaction done!");
+
 	}
+
+	public static void buyAvailableBuilding (Owner person){
+		int c = 0;
+		int choice;
+		LOGGER.info("Which property do you want to buy?: ");
+		for (int i = 0; i < availableForYou.size(); i++) {
+			LOGGER.info("Option " + (c+1) +": " + availableForYou.getElementAt(c).getElement().getAddress() + " Price: AR$ " + availableForYou.getElementAt(c).getElement().getSalePrice());
+		}
+		try{
+			choice = input.nextInt() - 1;
+			person.buy(availableForYou.getElementAt(choice).getElement());
+			TransactionQueue.storeTransactionOrder(availableForYou.getElementAt(choice).getElement().getAddress() + " was bought.");
+		} catch(Exception e) {
+			LOGGER.info(e.getMessage());
+		}
+		LOGGER.info("Transaction done!");
+	}
+
 }
 
